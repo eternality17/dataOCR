@@ -506,21 +506,7 @@ class MainApp(QMainWindow):
     def _update_infer_result(self, result: dict):
         """
         更新OK、NG等信息
-                     msg = Message(
-            #     msg_type=MessageType.FRAME_RESULT,
-            #     source="SaveImageThread",
-            #     data={
-            #         "frame_id": packet.frame_id,
-            #         "verify_code": packet.verify_code,
-            #         "verify_msg": packet.verify_msg,
-            #         "image_url": image_url,
-            #
-            #         # 系统统计
-            #         "ok_count": stats["ok_count"],
-            #         "ng_count": stats["ng_count"],
-            #         "accuracy": stats["accuracy"]
-            #     }
-            # )
+
         """
 
         data = result.get("data")
@@ -535,7 +521,6 @@ class MainApp(QMainWindow):
         total = int(data.get("total_count", self.ok + self.ng))
         rate = (self.ok / total) if total > 0 else 0.0
 
-        # print("更新中----------ok:", self.ok, "----------ng:", self.ng, "  total", total)
 
         # 更新组件
         self.ui.ok_label.setText(f"OK: {self.ok}")
@@ -808,10 +793,10 @@ class MainApp(QMainWindow):
 
     def clear_stats(self):
         """
-        功能：清零，向TCP_Server发送"COMMAND_CLEAR"命令
+        功能：清零
         处理逻辑：
-        1）UI界面上的组件显示清零
-        2）发送TCP消息给AI端
+        UI界面上的组件显示清零
+        
         """
         # --------- UI组件清零-------------
         self.ok = 0
@@ -922,16 +907,9 @@ class MainApp(QMainWindow):
         """
         功能：停止AI端
         处理逻辑：
-        1）发送TCP消息
-        2）设置self.runner_running标志
-        3）更新状态条信息
+        1）设置self.runner_running标志
+        2）更新状态条信息
         """
-        # 向TCP Server发送COMMAND_STOP命令
-        # msg_type = MessageType.COMMAND_STOP
-        # data = {}
-        # source = "UI"
-        # ok = self.tcp_c
-        # lient.send(msg_type, data, source)
 
         if self.ai_server:
             t1 = int(time.time() * 1000)
@@ -941,8 +919,7 @@ class MainApp(QMainWindow):
             # print("平均每张耗时：", (self.end - self.begin) / (self.ok+self.ng), "ms")
 
             ok, msg = self.ai_server.stop()
-            # print("最终更新为-------ok:", self.ok, "----------ng:", self.ng)
-            # self.save_frontend_config()
+
 
             if ok:
                 self.runner_running = False
