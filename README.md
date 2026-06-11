@@ -15,7 +15,7 @@
 由于本项目依赖特定的嵌入式硬件（ARM + TPU），代码无法在通用PC上直接演示。
 
 *   **核心代码**：可以在 `ai/`, `config/`, `gpio/` 等目录下查阅项目的核心逻辑实现。
-*   **系统演示**：可以查看/docs下的演示视频，观看系统在目标设备上的完整运行过程。
+*   **系统演示**：可以查看`docs/`下的演示视频，观看系统在目标设备上的完整运行过程。
 
 ## 系统架构
 <img width="1142" height="1130" alt="image" src="https://github.com/user-attachments/assets/2fcf9059-79ca-4f45-8d72-fce5bb508a1d" />
